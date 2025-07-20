@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -17,8 +17,8 @@ export class MainComponent implements OnInit {
       sliderValue: "1.0",
       backgroundColor: "#1c1c2e"
     }
-    this.onBackgroundColorChange(this.uiELement.backgroundColor);
-    this.onBackgroundBrightnessChange(this.uiELement.sliderValue);
+    this.onBackgroundColorChange();
+    this.onBackgroundBrightnessChange();
   }
 
   protected onCheckBoxValueChange = ($event: boolean) => {
@@ -30,16 +30,16 @@ export class MainComponent implements OnInit {
       sliderValue: "1",
       backgroundColor: $event ? "#fff" : "#1c1c2e"
     }
-    this.onBackgroundColorChange(this.uiELement.backgroundColor);
-    this.onBackgroundBrightnessChange(this.uiELement.sliderValue);
+    this.onBackgroundColorChange();
+    this.onBackgroundBrightnessChange();
   }
 
-  protected onBackgroundColorChange = (color: string) => {
-    document.body.style.background = color;
+  protected onBackgroundColorChange = () => {
+    document.body.style.background = this.uiELement.backgroundColor;
   }
 
-  protected onBackgroundBrightnessChange = (value: string) => {
-    document.documentElement.style.filter = `brightness(${value})`
+  protected onBackgroundBrightnessChange = ($event: string | undefined = undefined) => {
+    document.documentElement.style.filter = `brightness(${$event || this.uiELement.sliderValue})`
   }
 }
 
