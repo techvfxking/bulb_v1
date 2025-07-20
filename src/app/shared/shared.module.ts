@@ -5,12 +5,16 @@ import { SectionComponent } from '../components/section/section.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ImageComponent } from '../components/image/image.component';
+import { LabelComponent } from '../components/label/label.component';
+import { CheckboxComponent } from '../components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
    InputComponent,
    SectionComponent,
-   ImageComponent
+   ImageComponent,
+   LabelComponent,
+   CheckboxComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,9 @@ import { ImageComponent } from '../components/image/image.component';
   exports: [
     InputComponent,
     SectionComponent,
-    ImageComponent
+    ImageComponent,
+    LabelComponent,
+    CheckboxComponent
   ]
 })
 export class SharedModule { }

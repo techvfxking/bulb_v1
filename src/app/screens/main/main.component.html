@@ -1,7 +1,22 @@
 <app-section className="container">
     <app-section className="content">
+
         <app-section className="img-container">
-            <app-image imageName="whiteBulb.png" imageAltText="White Bulb" imageCtrlId="bulbImage"></app-image>
+            <app-image [imageName]="uiELement.imageName" [imageExtraClasses]="uiELement.imageExtraClases"
+                imageAltText="Bulb" imageCtrlId="bulbImage"></app-image>
         </app-section>
+
+        <app-section className="toggle-wrapper">
+            <app-checkbox [inputValue]="uiELement.checkboxValue" (inputValueChange)="onCheckBoxValueChange($event)"
+                inputId="toggleBulb"></app-checkbox>
+        </app-section>
+
+        @if (uiELement.checkboxValue) {
+        <app-section className="brightness-slider">
+            <app-input inputType="range" inputId="toggleBulb" inputMin="0.1" inputMax="1" inputStep="0.1"
+                [inputValue]="uiELement.sliderValue" (inputValueChange)="onBackgroundBrightnessChange($event)"></app-input>
+        </app-section>
+        }
+
     </app-section>
 </app-section>

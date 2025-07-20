@@ -1,1 +1,1 @@
-<p>input works!</p>
+<input [(ngModel)]="inputValue" (input)="onValueChange($event)" [type]="inputType()" [id]="inputId()" [min]="inputMin()" [max]="inputMax()" [step]="inputStep()" />
