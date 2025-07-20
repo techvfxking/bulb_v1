@@ -8,8 +8,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   protected uiELement!: TUIElements;
+  protected currentTime!: string;
+
+  private interval!: any;
 
   ngOnInit() {
+    this.currentTime = "100";
     this.uiELement = {
       checkboxValue: false,
       imageExtraClases: "",
@@ -40,6 +44,16 @@ export class MainComponent implements OnInit {
 
   protected onBackgroundBrightnessChange = ($event: string | undefined = undefined) => {
     document.documentElement.style.filter = `brightness(${$event || this.uiELement.sliderValue})`
+  }
+
+  protected onStart = () => {
+    this.interval = setInterval(() => {
+      this.currentTime = String(Number(this.currentTime) - 1);
+    },1000);
+  }
+
+  protected onStop = () => {
+    clearInterval(this.interval);
   }
 }
 
