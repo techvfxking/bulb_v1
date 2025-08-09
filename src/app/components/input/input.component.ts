@@ -12,7 +12,7 @@ export class InputComponent {
   public inputMin: InputSignal<string> = input<string>("");
   public inputMax: InputSignal<string> = input<string>("");
   public inputStep: InputSignal<string> = input<string>("");
-  public inputValue: ModelSignal<string> = model.required<string>();
+  public inputValue: ModelSignal<string | undefined> = model.required<string | undefined>();
 
   protected onValueChange = ($event: Event) => {
     const inputValue = $event.target as HTMLInputElement

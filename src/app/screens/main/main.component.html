@@ -14,13 +14,19 @@
         @if (uiELement.checkboxValue) {
         <app-section className="brightness-slider">
             <app-input inputType="range" inputId="toggleBulb" inputMin="0.1" inputMax="1" inputStep="0.1"
-                [inputValue]="uiELement.sliderValue" (inputValueChange)="onBackgroundBrightnessChange($event)"></app-input>
+                [inputValue]="uiELement.sliderValue"
+                (inputValueChange)="onBackgroundBrightnessChange($event)"></app-input>
+        </app-section>
+        }@else {
+        @let nested = uiELement.isTimerRunning ? 'Stop' : 'Start';
+
+        <app-section className="timer-section">
+            <app-input inputType="number" inputMin="1" inputId="timerInputId" [inputValue]="uiELement.currentTime"
+                (inputValueChange)="onCurrentTimeInputChange($event)"></app-input>
+            <button id="timerStart" [class]="disableButton ? 'disabled' : ''" (click)="onStartOrStopTimerClick($event)">{{nested}}</button>
+            <button id="timerReset" [class]="disableButton ? 'disabled' : ''" (click)="onResetClick()">Reset</button>
         </app-section>
         }
-
-        <button (click)="onStart()" style="padding: 1rem;">Start</button>
-        <h1>Current Time: {{currentTime}}</h1>
-        <button (click)="onStop()" style="padding: 1rem;">Stop</button>
 
     </app-section>
 </app-section>

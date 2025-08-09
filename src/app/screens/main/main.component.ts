@@ -8,12 +8,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   protected uiELement!: TUIElements;
-  protected currentTime!: string;
-
-  private interval!: any;
+  protected disableButton: boolean = true;
 
   ngOnInit() {
-    this.currentTime = "100";
     this.uiELement = {
       checkboxValue: false,
       imageExtraClases: "",
@@ -46,14 +43,27 @@ export class MainComponent implements OnInit {
     document.documentElement.style.filter = `brightness(${$event || this.uiELement.sliderValue})`
   }
 
-  protected onStart = () => {
-    this.interval = setInterval(() => {
-      this.currentTime = String(Number(this.currentTime) - 1);
-    },1000);
+  protected onCurrentTimeInputChange = ($event: string | undefined = undefined) => {
+    if ($event === undefined || $event === null || $event.toString().trim() === '') {
+      this.disableButton = true;
+    } else {
+      this.disableButton = false;
+    }
+    this.uiELement = {
+      ...this.uiELement,
+      currentTime: $event
+    }
   }
 
-  protected onStop = () => {
-    clearInterval(this.interval);
+  protected onStartOrStopTimerClick = ($event: Event) => {
+    this.uiELement = {
+      ...this.uiELement,
+      isTimerRunning: !this.uiELement.isTimerRunning
+    }
+  }
+
+  protected onResetClick = () => {
+    this.onCurrentTimeInputChange(undefined);
   }
 }
 
@@ -63,4 +73,6 @@ export declare type TUIElements = {
   imageExtraClases: string;
   sliderValue: string;
   backgroundColor: string;
+  currentTime?: string;
+  isTimerRunning?: boolean;
 }
