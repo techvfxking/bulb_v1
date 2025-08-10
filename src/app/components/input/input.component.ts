@@ -13,6 +13,8 @@ export class InputComponent {
   public inputMax: InputSignal<string> = input<string>("");
   public inputStep: InputSignal<string> = input<string>("");
   public inputValue: ModelSignal<string | undefined> = model.required<string | undefined>();
+  public inputModeType: InputSignal<InputModeType | undefined> = input<InputModeType | undefined>();
+  public inputExtraClass: InputSignal<string | undefined> = input<string | undefined>("");
 
   protected onValueChange = ($event: Event) => {
     const inputValue = $event.target as HTMLInputElement
@@ -41,3 +43,18 @@ export type InputType =
   | 'time'
   | 'url'
   | 'week';
+
+export type InputModeType =
+  | 'email'
+  | 'full-width-latin'
+  | 'kana'
+  | 'kana-name'
+  | 'katakana'
+  | 'latin'
+  | 'latin-name'
+  | 'latin-prose'
+  | 'numeric'
+  | 'tel'
+  | 'url'
+  | 'verbatim';
+

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ImageComponent } from '../components/image/image.component';
 import { LabelComponent } from '../components/label/label.component';
 import { CheckboxComponent } from '../components/checkbox/checkbox.component';
+import { NoNegativeAlphaDirective } from '../components/directives/no.negative.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CheckboxComponent } from '../components/checkbox/checkbox.component';
    SectionComponent,
    ImageComponent,
    LabelComponent,
-   CheckboxComponent
+   CheckboxComponent,
+   NoNegativeAlphaDirective
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { CheckboxComponent } from '../components/checkbox/checkbox.component';
     SectionComponent,
     ImageComponent,
     LabelComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    NoNegativeAlphaDirective
   ]
 })
 export class SharedModule { }

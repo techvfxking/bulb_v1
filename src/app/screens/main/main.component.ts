@@ -9,6 +9,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   protected uiELement!: TUIElements;
   protected disableButton: boolean = true;
+  protected h1TimerValue: number | undefined = undefined;
+  protected timer: any;
 
   ngOnInit() {
     this.uiELement = {
@@ -53,12 +55,32 @@ export class MainComponent implements OnInit {
       ...this.uiELement,
       currentTime: $event
     }
+    this.h1TimerValue = Number(this.uiELement.currentTime);
   }
 
   protected onStartOrStopTimerClick = ($event: Event) => {
     this.uiELement = {
       ...this.uiELement,
       isTimerRunning: !this.uiELement.isTimerRunning
+    }
+
+    if (this.uiELement.isTimerRunning && this.h1TimerValue !== undefined) {
+      this.h1TimerValue = this.h1TimerValue - 1;
+      this.timer = setInterval(() => {
+        if (this.h1TimerValue !== undefined && this.h1TimerValue > 0) {
+          this.h1TimerValue = this.h1TimerValue - 1;
+        } else if (this.h1TimerValue === 0) {
+          this.uiELement = {
+            ...this.uiELement,
+            isTimerRunning: !this.uiELement.isTimerRunning
+          }
+          this.onCheckBoxValueChange(true);
+          this.onCurrentTimeInputChange(undefined);
+          clearInterval(this.timer);
+        }
+      }, 1000)
+    } else if (!this.uiELement.isTimerRunning) {
+      clearInterval(this.timer);
     }
   }
 
